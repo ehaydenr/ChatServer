@@ -25,6 +25,9 @@ public class RequestHandler extends Thread{
 		this.port = port;
 	}
 	
+	/**
+	 * Listen for requests and send connections to the interrogator
+	 */
 	public void run(){
 		Printer.println(this.getClass(), false, "Listening on port: " + port);
 		extractIp();
@@ -40,17 +43,14 @@ public class RequestHandler extends Thread{
 				}
 			}
 		} catch (IOException e) {
-			try {
-				skt.close();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				//e1.printStackTrace();
-			}
-			if(!this.isInterrupted())
+			if(!this.isInterrupted()){
+				this.interrupt();
 				e.printStackTrace();
+			}
 		}
 	}
 
+	// TODO: Make this grab the actual ip being hosted on
 	private void extractIp() {
 		try {
 			NetworkInterface i = NetworkInterface.getByName("eth0");

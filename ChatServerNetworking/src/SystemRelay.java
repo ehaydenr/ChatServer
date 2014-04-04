@@ -3,7 +3,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * make sure to implement automatic heartbeat sensing
+ * At the start of the dueTime, the system will send messages to the client to check
+ * to make sure the connection is maintained. If there is no response of the server
+ * can't understand the response by the time the deadTime is reached, the client is closed.
  * 
  * @author ehaydenr
  * 
@@ -12,8 +14,8 @@ public class SystemRelay extends Relay {
 
 	private Message heartbeat;
 	private Queue<ServerClient> clientsToBeClosed;
-	private final long dueTime = 20000L; // 10 seconds
-	private final long deadTime = 30000L; // 20 seconds
+	private final long dueTime = 20000L; // 10 seconds - Starts prompting for heartbeat
+	private final long deadTime = 30000L; // 20 seconds - Closes client
 
 	public SystemRelay(NetworkHandler server) {
 		super(server);

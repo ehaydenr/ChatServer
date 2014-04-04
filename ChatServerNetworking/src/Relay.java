@@ -2,6 +2,11 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * Allow messages to be added and then sent to the intended clients
+ * @author ehaydenr
+ *
+ */
 
 public abstract class Relay extends Thread{
 	protected NetworkHandler server;
@@ -22,6 +27,9 @@ public abstract class Relay extends Thread{
 	
 	public abstract void priorToSendingOutgoing();
 	
+	/**
+	 * Print out all messages in the outgoing Queue to their respective clients
+	 */
 	public void run(){
 		
 		// Print out all outgoing

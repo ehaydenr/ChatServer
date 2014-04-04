@@ -1,4 +1,8 @@
-
+/**
+ * Extend this to build a reponse bridge between Networking and client
+ * @author ehaydenr
+ *
+ */
 public abstract class Responder {
 	public abstract void clientRecieved(ServerClient client);
 	public abstract void clientDisconnected(ServerClient client);

@@ -8,7 +8,7 @@ import java.util.Queue;
 /**
  * Interrogator Thread
  * 
- * Notes Client connections have already been established, instantiate client
+ * Note Client connections have already been established. Instantiate client
  * object and interrogate connection to verify you want it in the main pool.
  * Have Request handler pass in reference to network manager. Call add in there.
  * 
@@ -16,8 +16,6 @@ import java.util.Queue;
  * 
  * Execution Interrogate, reject or accept at add to Network manager, remove
  * from pool
- * 
- * Methods Add client to pool
  * 
  * @author ehaydenr
  *

@@ -1,4 +1,8 @@
-
+/**
+ * Basic implementation of Responder Class
+ * @author ehaydenr
+ *
+ */
 public class BasicResponder extends Responder {
 
 	@Override

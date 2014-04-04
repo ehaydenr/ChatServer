@@ -3,7 +3,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
- * pull all recieved messages from accepted clients and forward them to their
+ * pull all received messages from accepted clients and forward them to their
  * respective threads (System, chat, applied)
  * 
  * NetworkManager Object
@@ -45,6 +45,7 @@ public class NetworkHandler extends Thread {
 		this.systemRelay = new SystemRelay(this);
 		this.appliedRelay = new AppliedRelay(this);
 		
+		// Name all threads for debugging purposes
 		this.chatRelay.setName("Chat Relay");
 		this.systemRelay.setName("System Relay");
 		this.appliedRelay.setName("Applied Relay");
@@ -102,18 +103,6 @@ public class NetworkHandler extends Thread {
 		}
 	}
 
-	public void setResponder(Responder responder) {
-		this.responder = responder;
-	}
-
-	public void setIpString(String string) {
-		this.ipString = string;
-	}
-
-	public String getIpString() {
-		return this.ipString;
-	}
-
 	public void interrogate(Socket connection) {
 		this.interrogator.addConnection(connection);
 	}
@@ -146,36 +135,13 @@ public class NetworkHandler extends Thread {
 			responder.clientDisconnected(client);
 		}
 	}
-
-	public void appliedMessageRecieved(Message message) {
-		this.responder.appliedMessageRecieved(message);
-	}
-
-	public boolean clientCapReached() {
-		synchronized (this.clientMap) {
-			boolean reached = this.clientMap.size() >= this.capOfClientsConnected;
-			if (reached) {
-				this.responder.capOfClientsReached();
-			}
-			return reached;
-		}
-	}
-
-	public static void main(String[] args) {
-		NetworkHandler handler = new NetworkHandler(new BasicResponder(), null, null);
-		handler.start();
-	}
-
+	
 	public void updateHeartbeat(Integer recipientId) {
 		synchronized (this.clientMap) {
 			clientMap.get(recipientId).updateHeartBeat();
 		}
 	}
-
-	public HashMap<Integer, ServerClient> getClientMap() {
-		return this.clientMap;
-	}
-
+	
 	public void shutdown() {
 		Printer.println(this.getClass(), false, "Shutdown called.. Interrupting threads");
 		this.chatRelay.interrupt();
@@ -203,7 +169,47 @@ public class NetworkHandler extends Thread {
 				}
 			}
 		}
-		
 	}
+	
+	//		TRIGGERS
+
+	public void appliedMessageRecieved(Message message) {
+		this.responder.appliedMessageRecieved(message);
+	}
+
+	public boolean clientCapReached() {
+		synchronized (this.clientMap) {
+			boolean reached = this.clientMap.size() >= this.capOfClientsConnected;
+			if (reached) {
+				this.responder.capOfClientsReached();
+			}
+			return reached;
+		}
+	}
+
+	// 		GETTER AND SETTERS
+	
+	public void setResponder(Responder responder) {
+		this.responder = responder;
+	}
+
+	public void setIpString(String string) {
+		this.ipString = string;
+	}
+
+	public String getIpString() {
+		return this.ipString;
+	}
+
+	public HashMap<Integer, ServerClient> getClientMap() {
+		return this.clientMap;
+	}
+	
+	public static void main(String[] args) {
+		NetworkHandler handler = new NetworkHandler(new BasicResponder(), null, null);
+		handler.start();
+	}
+
+	
 
 }

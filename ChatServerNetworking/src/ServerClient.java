@@ -1,7 +1,13 @@
 import java.net.Socket;
 import java.util.Date;
 
-
+/**
+ * Extension of the Client class to serve the server's needs. More client
+ * information recording put into place along with a record of the Network Handler
+ * and heartbeat update capabilities
+ * @author ehaydenr
+ *
+ */
 public class ServerClient extends Client {
 	
 	private Date requested, accepted, lastHeartBeat;
@@ -17,6 +23,13 @@ public class ServerClient extends Client {
 	public void updateHeartBeat() {
 		this.lastHeartBeat = new Date();
 	}
+	
+	public void closeClient(){
+		handler.removeClient(this);
+		super.closeClient();
+	}
+	
+	//		GETTERS AND SETTERS
 	
 	public Date getLastHeartbeat(){
 		return this.lastHeartBeat;
@@ -34,9 +47,6 @@ public class ServerClient extends Client {
 		this.accepted = accepted;
 	}
 	
-	public void closeClient(){
-		handler.removeClient(this);
-		super.closeClient();
-	}
+
 
 }
