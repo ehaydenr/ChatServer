@@ -1,0 +1,29 @@
+#backgroundVBox {
+	-fx-background-color:white;
+}
+
+#VBox {
+	-fx-background-color:linear-gradient(#A2A2A5, #CBCBCE);
+}
+#console {
+	-fx-font-size: 12.0px;
+ 	-fx-font-weight: bold;
+	-fx-text-fill: #FF6600;
+	-fx-background-color: #454550;
+}
+
+.label {
+	-fx-font-size: 12.0px;
+ 	-fx-font-weight: bold;
+ 	-fx-text-fill: #333333;
+ 	-fx-font-family: "Segoe UI Semibold";
+ 	-fx-effect: dropshadow( gaussian , rgba(255.0,255.0,255.0,0.5) , 0.0,0.0,0.0,1.0 );
+}
+
+#playCircle {
+	-fx-fill: green;
+}
+
+#playCircle:hover {
+	-fx-fill: linear-gradient(#009900, #00FF00);
+}

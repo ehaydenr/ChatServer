@@ -1,0 +1,6 @@
+#root {
+    -fx-focus-color: transparent;
+    -fx-accent: transparent; 
+    -fx-focus-color: #cce3f4; 
+    -fx-cell-focus-inner-border: transparent;
+}
